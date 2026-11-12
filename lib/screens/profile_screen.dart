@@ -6,12 +6,10 @@ import '../widgets/profile_card.dart';
 
 /// Layar untuk melihat dan mengubah profil mahasiswa.
 class ProfileScreen extends StatelessWidget {
+  /// Membuat layar profil.
   const ProfileScreen({super.key});
 
-  Future<void> _openEdit(
-    BuildContext context,
-    Student student,
-  ) async {
+  Future<void> _openEdit(BuildContext context, Student student) async {
     final updated = await showModalBottomSheet<bool>(
       context: context,
       isScrollControlled: true,

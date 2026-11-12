@@ -6,6 +6,7 @@ class ProfileCard extends StatelessWidget {
   final Student student;
   final VoidCallback? onEdit;
 
+  /// Membuat kartu profil mahasiswa.
   const ProfileCard({super.key, required this.student, this.onEdit});
 
   String get _initials {
@@ -23,7 +24,7 @@ class ProfileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
-      child: Padding(
+      child: Container(
         padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

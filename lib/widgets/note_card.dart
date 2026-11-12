@@ -8,6 +8,7 @@ class NoteCard extends StatelessWidget {
   final VoidCallback? onTap;
   final VoidCallback? onDelete;
 
+  /// Membuat kartu catatan.
   const NoteCard({super.key, required this.note, this.onTap, this.onDelete});
 
   @override

@@ -15,6 +15,7 @@ class AppProvider extends InheritedWidget {
   final Future<void> Function(String) deleteNote;
   final Future<void> Function() reload;
 
+  /// Membuat provider dari state yang diberikan.
   const AppProvider({
     super.key,
     required this.student,
@@ -39,6 +40,7 @@ class AppProvider extends InheritedWidget {
     return provider!;
   }
 
+  /// Menentukan apakah subtree perlu dibangun ulang.
   @override
   bool updateShouldNotify(AppProvider oldWidget) {
     return student != oldWidget.student ||
@@ -54,6 +56,7 @@ class AppProviderWrapper extends StatefulWidget {
   final NoteRepository? repository;
   final Student initialStudent;
 
+  /// Membuat wrapper state global.
   const AppProviderWrapper({
     super.key,
     required this.child,
@@ -66,6 +69,7 @@ class AppProviderWrapper extends StatefulWidget {
     ),
   });
 
+  /// Membuat state wrapper.
   @override
   State<AppProviderWrapper> createState() => _AppProviderWrapperState();
 }

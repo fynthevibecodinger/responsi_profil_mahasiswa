@@ -8,6 +8,7 @@ class Note {
   final DateTime date;
   final String? content;
 
+  /// Membuat catatan kuliah.
   const Note({
     required this.id,
     required this.title,
@@ -16,12 +17,7 @@ class Note {
   });
 
   /// Membuat salinan dengan sebagian field yang diubah.
-  Note copyWith({
-    String? id,
-    String? title,
-    DateTime? date,
-    String? content,
-  }) {
+  Note copyWith({String? id, String? title, DateTime? date, String? content}) {
     return Note(
       id: id ?? this.id,
       title: title ?? this.title,
@@ -32,11 +28,7 @@ class Note {
 
   /// Metadata yang aman disimpan di SharedPreferences.
   Map<String, dynamic> toMetadataJson() {
-    return {
-      'id': id,
-      'title': title,
-      'date': date.toIso8601String(),
-    };
+    return {'id': id, 'title': title, 'date': date.toIso8601String()};
   }
 
   /// Membuat [Note] dari metadata SharedPreferences.

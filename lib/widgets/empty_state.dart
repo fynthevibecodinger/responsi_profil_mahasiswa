@@ -6,6 +6,7 @@ class EmptyState extends StatelessWidget {
   final String message;
   final VoidCallback? onAction;
 
+  /// Membuat tampilan daftar kosong.
   const EmptyState({
     super.key,
     this.title = 'Belum ada catatan',
