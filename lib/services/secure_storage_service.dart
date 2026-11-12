@@ -6,6 +6,7 @@ class SecureStorageService {
 
   final FlutterSecureStorage _storage;
 
+  /// Membuat service secure storage.
   SecureStorageService({FlutterSecureStorage? storage})
     : _storage = storage ?? const FlutterSecureStorage();
 

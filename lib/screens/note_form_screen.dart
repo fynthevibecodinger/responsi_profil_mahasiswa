@@ -5,6 +5,7 @@ import '../utils/validators.dart';
 
 /// Form untuk menambahkan catatan kuliah baru.
 class NoteFormScreen extends StatefulWidget {
+  /// Membuat form catatan.
   const NoteFormScreen({super.key});
 
   @override

@@ -13,6 +13,7 @@ class NoteRepository {
 
   final SecureStorageService _secureStorage;
 
+  /// Membuat repository catatan.
   NoteRepository({SecureStorageService? secureStorage})
     : _secureStorage = secureStorage ?? SecureStorageService();
 

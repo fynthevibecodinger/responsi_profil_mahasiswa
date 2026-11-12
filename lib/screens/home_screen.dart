@@ -10,6 +10,7 @@ import 'profile_screen.dart';
 
 /// Layar utama yang menampilkan profil singkat dan daftar catatan.
 class HomeScreen extends StatelessWidget {
+  /// Membuat layar utama.
   const HomeScreen({super.key});
 
   Future<void> _openForm(BuildContext context) async {
@@ -63,10 +64,7 @@ class HomeScreen extends StatelessWidget {
           ),
           TextButton(
             onPressed: () => Navigator.pop(dialogContext, true),
-            child: const Text(
-              'Hapus',
-              style: TextStyle(color: Colors.red),
-            ),
+            child: const Text('Hapus', style: TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -340,7 +338,9 @@ class _ApiUsersSheetState extends State<_ApiUsersSheet> {
 
                   final users = snapshot.data ?? [];
                   if (users.isEmpty) {
-                    return const Center(child: Text('Tidak ada data pengguna.'));
+                    return const Center(
+                      child: Text('Tidak ada data pengguna.'),
+                    );
                   }
 
                   return ListView.builder(

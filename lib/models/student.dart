@@ -5,6 +5,7 @@ class Student {
   final String programStudi;
   final String email;
 
+  /// Membuat data profil mahasiswa.
   const Student({
     required this.name,
     required this.nim,

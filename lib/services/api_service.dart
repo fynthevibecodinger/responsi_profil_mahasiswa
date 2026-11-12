@@ -10,6 +10,7 @@ class ApiService {
   final http.Client _client;
   final String _baseUrl;
 
+  /// Membuat service API.
   ApiService({http.Client? client, String? baseUrl})
     : _client = client ?? http.Client(),
       _baseUrl = baseUrl ?? AppConfig.baseUrl;
@@ -50,10 +51,7 @@ class ApiService {
   }
 
   Map<String, String> _buildHeaders() {
-    return {
-      'Content-Type': 'application/json',
-      'X-API-Key': AppConfig.apiKey,
-    };
+    return {'Content-Type': 'application/json', 'X-API-Key': AppConfig.apiKey};
   }
 
   /// Menutup koneksi HTTP.
