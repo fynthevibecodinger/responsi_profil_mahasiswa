@@ -1,30 +1,52 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:responsi_profil_mahasiswa/main.dart';
+import 'package:responsi_profil_mahasiswa/models/note.dart';
+import 'package:responsi_profil_mahasiswa/models/student.dart';
+import 'package:responsi_profil_mahasiswa/utils/validators.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  group('Validators', () {
+    test('judul valid dan tidak valid', () {
+      expect(Validators.validateTitle('Catatan'), isNull);
+      expect(Validators.validateTitle('ab'), isNotNull);
+      expect(Validators.validateTitle('a' * 51), isNotNull);
+    });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    test('isi catatan minimal 10 karakter', () {
+      expect(Validators.validateContent('materi kuliah hari ini'), isNull);
+      expect(Validators.validateContent('pendek'), isNotNull);
+    });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    test('sanitize membersihkan karakter berbahaya', () {
+      expect(
+        Validators.sanitize('<script>"x"</script>'),
+        '&lt;script&gt;&quot;x&quot;&lt;/script&gt;',
+      );
+    });
+  });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  group('Model', () {
+    test('metadata Note tidak menyimpan content', () {
+      final note = Note(
+        id: '1',
+        title: 'Judul',
+        date: DateTime(2026, 1, 1),
+        content: 'rahasia',
+      );
+
+      expect(note.toMetadataJson().containsKey('content'), isFalse);
+    });
+
+    test('Student dapat dikonversi bolak-balik', () {
+      const student = Student(
+        name: 'A',
+        nim: '1',
+        programStudi: 'Informatika',
+        email: 'a@example.com',
+      );
+
+      final result = Student.fromMap(student.toMap());
+      expect(result.name, student.name);
+      expect(result.email, student.email);
+    });
   });
 }
