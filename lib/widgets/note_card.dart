@@ -17,11 +17,23 @@ class NoteCard extends StatelessWidget {
 
     return Card(
       margin: const EdgeInsets.only(bottom: 8),
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: BorderSide(color: Colors.deepPurple.withValues(alpha: 0.15)),
+      ),
       child: ListTile(
-        leading: const CircleAvatar(
-          backgroundColor: Colors.deepPurple,
-          foregroundColor: Colors.white,
-          child: Icon(Icons.note_alt_outlined),
+        leading: Container(
+          width: 42,
+          height: 42,
+          decoration: BoxDecoration(
+            color: Colors.deepPurple.withValues(alpha: 0.1),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: const Icon(
+            Icons.description_outlined,
+            color: Colors.deepPurple,
+          ),
         ),
         title: Text(
           note.title,

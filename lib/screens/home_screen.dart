@@ -135,6 +135,38 @@ class HomeScreen extends StatelessWidget {
           : Column(
               children: [
                 _ProfileSummary(student: provider.student),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                  child: Row(
+                    children: [
+                      const Text(
+                        'Catatan Kuliah',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 2,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.deepPurple.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Text(
+                          '${provider.notes.length}',
+                          style: const TextStyle(
+                            color: Colors.deepPurple,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 Expanded(
                   child: provider.notes.isEmpty
                       ? EmptyState(onAction: () => _openForm(context))
@@ -183,29 +215,71 @@ class _ProfileSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    final colors = Theme.of(context).colorScheme;
+
+    return Container(
+      width: double.infinity,
       margin: const EdgeInsets.all(16),
-      child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: Colors.deepPurple,
-          foregroundColor: Colors.white,
-          child: Text(
-            _initials,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
-        title: Text(
-          student.name,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        subtitle: Text('NIM: ${student.nim}'),
-        trailing: const Icon(Icons.chevron_right),
+      decoration: BoxDecoration(
+        color: colors.primaryContainer,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(20),
         onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (_) => const ProfileScreen()),
           );
         },
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 28,
+                backgroundColor: Colors.deepPurple,
+                foregroundColor: Colors.white,
+                child: Text(
+                  _initials,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'PROFIL MAHASISWA',
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 1.2,
+                        color: colors.onPrimaryContainer.withValues(alpha: 0.7),
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      student.name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text('NIM: ${student.nim}'),
+                  ],
+                ),
+              ),
+              Icon(Icons.chevron_right, color: colors.onPrimaryContainer),
+            ],
+          ),
+        ),
       ),
     );
   }
